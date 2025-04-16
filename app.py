@@ -3,7 +3,8 @@
 import streamlit as st
 import datetime
 import random
-from db.database import init_db, save_item_to_db, get_all_items_from_db, save_tryon_to_db, get_latest_tryon_from_db
+from db_module.database import init_db, save_item_to_db, get_all_items_from_db, save_tryon_to_db, get_latest_tryon_from_db
+
 
 # 初始化資料庫
 init_db()
