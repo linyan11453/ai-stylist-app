@@ -1,0 +1,24 @@
+import streamlit as st
+from db.database import init_db, save_item_to_db, get_all_items_from_db
+
+# 初始化資料庫
+init_db()
+
+st.title("AI 穿搭推薦應用程式")
+
+# 上傳衣物圖片
+uploaded_file = st.file_uploader("上傳您的衣物圖片", type=["jpg", "png"])
+if uploaded_file:
+    # 儲存圖片並更新資料庫（此處需補充實際儲存邏輯）
+    img_path = f"images/{uploaded_file.name}"
+    with open(img_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
+    save_item_to_db("上衣", img_path)
+    st.success("圖片已上傳並儲存至資料庫！")
+
+# 顯示所有衣物圖片
+st.subheader("您的衣櫥")
+items = get_all_items_from_db()
+for item_type, img_path in items:
+    st.text(f"類型：{item_type}")
+    st.image(img_path, width=200)
